@@ -51,11 +51,11 @@
 - `DOMAIN`: Auth0テナント（または他の認証サービス）のドメイン。
 - `MGMT_CLIENT_ID`: 認証プロバイダーの管理API用のクライアントID。
 - `MGMT_CLIENT_SECRET`: 管理API用のクライアントシークレット。
-- `ISSUER_BASE_URL`: 発行者のベースURL（例：Auth0の場合は`https://your-tenant-domain`）。
-- `SECRET`: セッション管理とCSRFトークン生成用の長くランダムに生成された文字列。この値の安全性を保つことが重要です。
+- `ISSUER_BASE_URL`: 発行者のベースURL（例：Auth0 JPリージョンの場合は`https://your-tenant-domain.jp.auth0.com`）。
+- `SECRET`: セッション管理とCSRFトークン生成用の長くランダムに生成された文字列。
+- `CSURF_SECRET`: CSRFトークン生成用の32文字のランダムに生成された文字列。
 - `PORT`: Expressサーバーがリッスンするポート番号。デフォルトは`3000`です。
 
-3. `.env`ファイルがバージョン管理にプッシュされないように、このファイルを`.gitignore`ファイルに含めることを確認してください。
 
 ### このアプリケーションの使用方法
 
