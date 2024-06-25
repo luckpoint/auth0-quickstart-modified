@@ -4,6 +4,9 @@ node_modules/
 # Environment variables
 .env
 
+# session db
+sessions.db
+
 # Logs
 logs/
 *.log

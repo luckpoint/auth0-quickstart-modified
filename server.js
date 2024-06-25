@@ -5,17 +5,28 @@ const path = require('path');
 const router = require('./routes/index');
 const { auth } = require('express-openid-connect');
 const csurf = require("tiny-csrf");
+const sqlite = require("better-sqlite3");
 const session = require("express-session");
+
+const db = new sqlite("sessions.db", { verbose: console.log });
+const SqliteStore = require("better-sqlite3-session-store")(session)
+const store = new SqliteStore({
+  client: db, 
+  expired: {
+    clear: true,
+    intervalMs: 900000 //ms = 15min
+  }
+});
 const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser("cookie-parser-secret"));
 // NOTE: サンプルはlocalhostで動くhttpサーバーなので、secureはfalseにしておく
-app.use(session({ secret: "csrf-secret", cookie: { secure: false }, resave: false, saveUninitialized: true }));
+app.use(session({ store, secret: process.env.SECRET, cookie: { secure: false }, resave: false, saveUninitialized: true }));
 app.use(
   csurf(
-    "123456789iamasecret987654321look", // secret -- must be 32 bits or chars in length
+    process.env.CSURF_SECRET, // secret -- must be 32 bits or chars in length
     ["POST"], // the request methods we want CSRF protection for
     ["/callback"], // any URLs we want to exclude, either as strings or regexp
     []  // any requests from here will not see the token and will not generate a new one
