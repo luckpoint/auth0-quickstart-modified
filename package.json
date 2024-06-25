@@ -1,0 +1,23 @@
+{
+  "name": "auth0-express-webapp-sample",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "dependencies": {
+    "auth0": "^4.1.0",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "debug": "~3.2.7",
+    "dotenv": "^6.1.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-openid-connect": "^2.17.0",
+    "express-session": "^1.17.3",
+    "http-errors": "~1.8.1",
+    "morgan": "~1.10.0",
+    "tiny-csrf": "^1.1.3"
+  }
+}

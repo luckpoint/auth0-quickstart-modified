@@ -1,0 +1,41 @@
+<%- include('partials/header') -%>
+
+  <h1 class="text-4xl mb-4">Welcome <%= user.nickname %></h1>
+
+  <% if (user.picture) { %>
+    <img class="block py-3" src="<%= user.picture %>" width="300">
+  <% } %>
+  
+  <p class="py-3">
+    This is the content of <code class="bg-gray-200">req.user</code>.<br>
+    <strong>Note:</strong> <code class="bg-gray-200">_raw</code> and <code class="bg-gray-200">_json</code> properties have been omitted.
+  </p>
+
+  <% if (phoneNumber) { %>
+  <div class="py-3 mb-4">
+    <label for="phone-number" class="block text-sm font-medium text-gray-700">Phone Number:</label>
+    <form action="/profile" method="post">
+      <div class="mt-1 flex rounded-md shadow-sm">
+        <input type="text" name="phone-number" id="phone-number" value="<%= phoneNumber %>" class="flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300" readonly>
+        <button type="submit" name="action" value="delete" class="inline-flex items-center px-3 rounded-r-md border border-gray-300 bg-red-500 text-white text-sm">Delete</button>
+      </div>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    </form>
+  </div>
+<% } else { %>
+  <div class="py-3 mb-4">
+    <label for="new-phone-number" class="block text-sm font-medium text-gray-700">Add Phone Number:</label>
+    <form action="/profile" method="post">
+      <div class="mt-1">
+        <button type="submit" name="action" value="add" class="inline-flex items-center px-3 rounded-r-md border border-gray-300 bg-green-500 text-white text-sm">Add</button>
+      </div>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    </form>
+  </div>
+<% } %>
+
+
+
+  <pre class="block bg-gray-300 p-4 text-sm overflow-scroll"><%= userProfile %></pre>
+
+<%- include('partials/footer') -%>
